@@ -13,7 +13,8 @@ This project ranks candidate events for each user in the [Kaggle Event Recommend
 ## Method
 
 - Retain the earliest exposure for each user–event pair: 15,398 training records become 15,220 pairs covering 2,034 users.
-- Combine contextual features, social response statistics, normalized content features, content-cluster distances, user interest profiles and batch-relative features.
+- Combine contextual features, social response statistics, one-hot encoded content-cluster membership, user interest profiles and batch-relative features.
+- Apply log compression and L2 normalization to the 101-dimensional content vectors before clustering and profile construction. KMeans `predict()` assigns a cluster ID, which is encoded into 20 one-hot columns for the classifier.
 - Fit content clustering and locale encoding within each training fold.
 - Train HistGradientBoostingClassifier and rank validation candidates by predicted interest, breaking score ties by event ID.
 - Compute AP@200 per user, average within each fold, and report the mean across five folds. The split and model seed is 25.
@@ -24,6 +25,7 @@ The following layout is used by the run instructions. Place the six project Pyth
 
 ```text
 README.md
+requirements.txt
 src/
     data.py
     feature.py
@@ -58,7 +60,7 @@ Create and activate an isolated environment in PowerShell from the repository ro
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
-python -m pip install numpy==2.3.5 pandas==3.0.1 scikit-learn==1.6.1
+python -m pip install -r requirements.txt
 ```
 
 ## Run cross-validation
@@ -88,20 +90,26 @@ The program prints preprocessing progress, each fold's MAP@200 and the five-fold
 | KMeans initializations | 10 |
 | KMeans maximum iterations | 300 |
 | Random seed | 25 |
+| Advanced geographic matching | Disabled (`advancedgeo_on=False`) |
 
 Settings and feature switches are defined near the beginning of `src/data.py`.
 
 ## Results reported in the final report
 
-| Configuration | Mean five-fold MAP@200 |
-|---|---:|
-| B0: Context baseline | 0.687183 |
-| B1: Context + social/content | 0.728832 |
-| B2: B1 + profiles | 0.728242 |
-| F: B2 + batch features | 0.768746 |
-| A: Full model without profiles | 0.766471 |
+The final HistGB score is **0.7677293929235487**, as confirmed by the group leader's frozen record at `experiments/rewrite_optimization_20261111/new_query_relative/result.json`. It is displayed as **0.767729** in the report and **0.7677** in the presentation. This path identifies the original local experiment record; it is not currently a repository link.
 
-These values are the saved controlled-comparison results used in the report. The main entry point runs the full model. The comparative configurations were evaluated with a supplementary experiment wrapper; they are not all executed by the command above. Scores are cross-validation measurements, not Kaggle leaderboard scores.
+The four-model comparison uses the same candidate pairs, user folds and feature matrix within each fold:
+
+| Model | Mean five-fold MAP@200 | Sample fold SD |
+|---|---:|---:|
+| HistGradientBoosting | **0.767729** | 0.009476 |
+| Random Forest | 0.764186 | 0.011295 |
+| RF+LR reference adaptation | 0.748328 | 0.014215 |
+| MLP | 0.666460 | 0.016109 |
+
+HistGB scored higher than Random Forest in three of five folds and higher than the RF+LR adaptation in all five folds. The adaptation uses the project features with reference weights of 0.69 for RF and 0.57 for LR. The MLP used hidden layers (64, 32) and reached its 150-iteration limit in every fold.
+
+These comparison results come from the team's `model_comparison_report_package_20261126`. Its scripts and result files will be added to the repository separately. The current `python src/data.py` command runs HistGB cross-validation. All reported scores are cross-validation MAP@200.
 
 ## Implementation index
 
@@ -124,5 +132,6 @@ Attendance and friendship data are snapshots. User separation prevents overlap b
 - [Kaggle competition](https://www.kaggle.com/competitions/event-recommendation-engine-challenge)
 - [HistGradientBoostingClassifier documentation](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.HistGradientBoostingClassifier.html)
 - [KMeans documentation](https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html)
+- [Andrei Olariu's RF+LR reference implementation](https://github.com/andreiolariu/kaggle-event-recommendation/blob/master/model.py)
 
 OpenAI Codex supported technical explanations, debugging, report drafting and editing, layout, and supplementary comparison and verification scripts. Member responsibilities and detailed contributions are described in the final report.
