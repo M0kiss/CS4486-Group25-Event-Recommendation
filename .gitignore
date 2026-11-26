@@ -221,3 +221,12 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Kaggle competition data
+data/raw/
+*.csv
+*.csv.gz
+*.zip
+
+# Local system files
+.DS_Store
