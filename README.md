@@ -21,7 +21,7 @@ This project ranks candidate events for each user in the [Kaggle Event Recommend
 
 ## Repository layout
 
-The following layout is used by the run instructions. Place the six project Python modules inside `src/`.
+The project code is in `src/`; saved model comparison records are in `experiments/model_comparison/`.
 
 ```text
 README.md
@@ -33,6 +33,8 @@ src/
     validation.py
     interest_profile.py
     geography.py
+experiments/
+    model_comparison/    # Comparison script, settings and saved results
 data/
     raw/                 # Locally downloaded CSV files; not included in Git
 ```
@@ -96,7 +98,7 @@ Settings and feature switches are defined near the beginning of `src/data.py`.
 
 ## Results reported in the final report
 
-The final HistGB score is **0.7677293929235487**, as confirmed by the group leader's frozen record at `experiments/rewrite_optimization_20261111/new_query_relative/result.json`. It is displayed as **0.767729** in the report and **0.7677** in the presentation. This path identifies the original local experiment record; it is not currently a repository link.
+The final HistGB mean five-fold MAP@200 is **0.767729**, shown as **0.7677** in the presentation. The result is recorded in [summary.csv](experiments/model_comparison/summary.csv), with individual fold scores in [fold_scores.csv](experiments/model_comparison/fold_scores.csv).
 
 The four-model comparison uses the same candidate pairs, user folds and feature matrix within each fold:
 
@@ -109,7 +111,7 @@ The four-model comparison uses the same candidate pairs, user folds and feature 
 
 HistGB scored higher than Random Forest in three of five folds and higher than the RF+LR adaptation in all five folds. The adaptation uses the project features with reference weights of 0.69 for RF and 0.57 for LR. The MLP used hidden layers (64, 32) and reached its 150-iteration limit in every fold.
 
-These comparison results come from the team's `model_comparison_report_package_20261126`. Its scripts and result files will be added to the repository separately. The current `python src/data.py` command runs HistGB cross-validation. All reported scores are cross-validation MAP@200.
+These results come from the team's `model_comparison_report_package_20261126`. The [comparison directory](experiments/model_comparison/README.md) provides the script, original configuration, fold assignments and held-out predictions. Its README explains how to run the four-model comparison with its recorded dependencies. The main `python src/data.py` command runs HistGB cross-validation using the main project environment described above. All reported scores are cross-validation MAP@200.
 
 ## Implementation index
 
@@ -124,6 +126,7 @@ These comparison results come from the team's `model_comparison_report_package_2
 | Interest profiles | `src/interest_profile.py`: `build_profile_features()` |
 | Batch-relative features | `src/feature.py`: `query_relative_feature()` |
 | Training and validation | `src/model.py`: `run_cv()` |
+| Four-model comparison and results | [Comparison materials](experiments/model_comparison/README.md) |
 
 Attendance and friendship data are snapshots. User separation prevents overlap between training and validation users, while snapshot timing remains a limitation of the evaluation.
 

@@ -1,0 +1,81 @@
+{
+  "seed": 25,
+  "folds": 5,
+  "metric": "MAP@200; users with no positive labels score zero; mean of fold means",
+  "models": {
+    "HistGradientBoosting": {
+      "max_iter": 300,
+      "max_leaf_nodes": 31,
+      "min_samples_leaf": 60,
+      "learning_rate": 0.05,
+      "l2_regularization": 10,
+      "early_stopping": false,
+      "random_state": 25
+    },
+    "RandomForest": {
+      "n_estimators": 300,
+      "min_samples_leaf": 5,
+      "max_features": "sqrt",
+      "random_state": 25,
+      "n_jobs": 2
+    },
+    "MLP": {
+      "hidden_layer_sizes": [
+        64,
+        32
+      ],
+      "alpha": 0.01,
+      "max_iter": 150,
+      "early_stopping": false,
+      "random_state": 25
+    }
+  },
+  "versions": {
+    "python": "3.13.15 (v3.13.15:4061bc4c35f, Aug  5 2026, 09:08:51) [Clang 21.0.0 (clang-2100.1.1.101)]",
+    "numpy": "2.5.4",
+    "pandas": "3.1.1",
+    "sklearn": "1.9.1"
+  },
+  "source_sha256": {
+    "interest_profile.py": "115808159a6c69e5b97205104e494e049a84490fe11c60cd92efd4953fc7d0a6",
+    "geography.py": "e0d253ff95797aad9e2ee44f54f278dbafcb527d2769fb1af368fd9f273cfa55",
+    "feature.py": "456059f73f0f367ee14b6f6c155d40674593cd3fca5added34afe75d1ed3ac24",
+    "model.py": "6d0bc76d1e51f3a014bccc797e0d0673c1bd791623b2f7405a4ac6cfb82db7de",
+    "data.py": "93c89e73b6cd89e7143a460eea1bc35ef66f6daddaa4e2b4d0dc5c333fca185f",
+    "validation.py": "6b8d20a0704d0886743d4a12f6a1860de9d782702c187c788bace9610cc494f9"
+  },
+  "kmeans": {
+    "n_clusters": 20,
+    "n_init": 10,
+    "max_iter": 300,
+    "random_state": 25
+  },
+  "feature_switches": {
+    "locale": true,
+    "calendar": true,
+    "relative": true
+  },
+  "notes": [
+    "No tuning search; fixed candidate configurations. Same CV used for exploratory comparison, not an independent final test.",
+    "RF uses training-fold median imputation; MLP uses training-fold imputation and scaling.",
+    "Auxiliary attendance snapshots have unverified temporal availability."
+  ],
+  "reference_adaptation": {
+    "source": "https://github.com/andreiolariu/kaggle-event-recommendation/blob/master/model.py",
+    "random_forest": "Reuses the standalone RandomForest in this comparison",
+    "logistic_regression": {
+      "C": 0.03,
+      "l1_ratio": 1.0,
+      "solver": "liblinear",
+      "max_iter": 1000,
+      "random_state": 25
+    },
+    "preprocessing": "Training-fold median imputation and scaling for logistic regression",
+    "weights": {
+      "RandomForest": 0.69,
+      "LogisticRegression": 0.57
+    },
+    "features": "Group feature set for both branches; source used separate feature subsets",
+    "timing": "Blend timing includes the reused RF fit/predict time"
+  }
+}

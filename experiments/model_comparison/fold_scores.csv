@@ -1,0 +1,21 @@
+model,fold,users,map200,seconds,warnings
+HistGradientBoosting,0,407,0.7668649373303228,1.4982293749999371,
+RandomForest,0,407,0.7617599114349993,1.4580516249998254,
+MLP,0,407,0.6494976622464059,2.0118225000005623,Stochastic Optimizer: Maximum iterations (150) reached and the optimization hasn't converged yet.
+RF+LR reference adaptation,0,407,0.7374122431922527,1.5686208750003061,
+HistGradientBoosting,1,407,0.7604900563162019,1.4771950829999696,
+RandomForest,1,407,0.7471835500367346,1.473133250000501,
+MLP,1,407,0.6691717857479732,2.042046417000165,Stochastic Optimizer: Maximum iterations (150) reached and the optimization hasn't converged yet.
+RF+LR reference adaptation,1,407,0.7405001586749024,1.599950333000379,
+HistGradientBoosting,2,407,0.7824270643063616,1.4695266250000714,
+RandomForest,2,407,0.7771062794114743,1.4893917080007668,
+MLP,2,407,0.6867506554934825,2.0446494580000945,Stochastic Optimizer: Maximum iterations (150) reached and the optimization hasn't converged yet.
+RF+LR reference adaptation,2,407,0.7727028172305621,1.599824291000914,
+HistGradientBoosting,3,407,0.7585895724532088,1.425573292000081,
+RandomForest,3,407,0.7637489296580205,1.5039444999993066,
+MLP,3,407,0.6509311439812471,2.0266063749995737,Stochastic Optimizer: Maximum iterations (150) reached and the optimization hasn't converged yet.
+RF+LR reference adaptation,3,407,0.7425284788921154,1.622456291999697,
+HistGradientBoosting,4,406,0.7702753342116478,1.4451233330000832,
+RandomForest,4,406,0.7711326802802592,1.4972204169998804,
+MLP,4,406,0.6759483146975668,2.0239453750000393,Stochastic Optimizer: Maximum iterations (150) reached and the optimization hasn't converged yet.
+RF+LR reference adaptation,4,406,0.7484938764098377,1.624294541999916,
