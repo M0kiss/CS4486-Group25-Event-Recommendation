@@ -1,0 +1,96 @@
+{
+  "environment": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "pandas": "3.0.1",
+    "sklearn": "1.6.1",
+    "threads": 1
+  },
+  "source_hashes": {
+    "interest_profile.py": "115808159a6c69e5b97205104e494e049a84490fe11c60cd92efd4953fc7d0a6",
+    "geography.py": "e0d253ff95797aad9e2ee44f54f278dbafcb527d2769fb1af368fd9f273cfa55",
+    "feature.py": "456059f73f0f367ee14b6f6c155d40674593cd3fca5added34afe75d1ed3ac24",
+    "model.py": "6d0bc76d1e51f3a014bccc797e0d0673c1bd791623b2f7405a4ac6cfb82db7de",
+    "data.py": "93c89e73b6cd89e7143a460eea1bc35ef66f6daddaa4e2b4d0dc5c333fca185f",
+    "validation.py": "6b8d20a0704d0886743d4a12f6a1860de9d782702c187c788bace9610cc494f9"
+  },
+  "results": {
+    "without_batch": {
+      "mean": 0.7267101920785802,
+      "folds": [
+        {
+          "fold": 0,
+          "users": 407,
+          "map200": 0.7215292285255911
+        },
+        {
+          "fold": 1,
+          "users": 407,
+          "map200": 0.7142155787826819
+        },
+        {
+          "fold": 2,
+          "users": 407,
+          "map200": 0.7474486219459036
+        },
+        {
+          "fold": 3,
+          "users": 407,
+          "map200": 0.7115894120309738
+        },
+        {
+          "fold": 4,
+          "users": 406,
+          "map200": 0.7387681191077512
+        }
+      ],
+      "seconds": 21.162458181381226
+    },
+    "with_batch": {
+      "mean": 0.7677746291495217,
+      "folds": [
+        {
+          "fold": 0,
+          "users": 407,
+          "map200": 0.7670765315341909
+        },
+        {
+          "fold": 1,
+          "users": 407,
+          "map200": 0.7576796331774869
+        },
+        {
+          "fold": 2,
+          "users": 407,
+          "map200": 0.7839475164188686
+        },
+        {
+          "fold": 3,
+          "users": 407,
+          "map200": 0.7588710913710914
+        },
+        {
+          "fold": 4,
+          "users": 406,
+          "map200": 0.7712983732459708
+        }
+      ],
+      "seconds": 23.330080032348633
+    }
+  },
+  "model_parameters": {
+    "max_iter": 300,
+    "max_leaf_nodes": 31,
+    "min_samples_leaf": 60,
+    "learning_rate": 0.05,
+    "l2_regularization": 10,
+    "early_stopping": false,
+    "random_state": 25
+  },
+  "kmeans_parameters": {
+    "n_clusters": 20,
+    "n_init": 10,
+    "max_iter": 300,
+    "random_state": 25
+  }
+}
