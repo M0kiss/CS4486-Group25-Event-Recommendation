@@ -34,7 +34,8 @@ src/
     interest_profile.py
     geography.py
 experiments/
-    model_comparison/    # Comparison script, settings and saved results
+    model_comparison/             # Four-model comparison and saved results
+    batch_feature_verification/   # Paired batch-feature experiment and evidence
 data/
     raw/                 # Locally downloaded CSV files; not included in Git
 ```
