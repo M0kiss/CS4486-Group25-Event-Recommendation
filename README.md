@@ -113,6 +113,12 @@ HistGB scored higher than Random Forest in three of five folds and higher than t
 
 These results come from the team's `model_comparison_report_package_20261126`. The [comparison directory](experiments/model_comparison/README.md) provides the script, original configuration, fold assignments and held-out predictions. Its README explains how to run the four-model comparison with its recorded dependencies. The main `python src/data.py` command runs HistGB cross-validation using the main project environment described above. All reported scores are cross-validation MAP@200.
 
+## Batch-relative feature experiment
+
+A supplementary paired HistGB run obtains **0.726710** without the six batch-relative features and **0.767775** with them, an improvement of **0.041064**. All five folds improve. Parameters, other features and user folds are held fixed.
+
+The [paired experiment materials](experiments/batch_feature_verification/README.md) include the script, settings, fold scores and predictions. This is a separate run from the four-model comparison above, whose original results remain unchanged. The feature gain is calculated within the paired run.
+
 ## Implementation index
 
 | Report topic | Source and function |
